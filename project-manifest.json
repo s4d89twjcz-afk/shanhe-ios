@@ -1,0 +1,31 @@
+{
+  "minimumIOS": "17.0",
+  "swiftVersion": "5.0",
+  "sourceFiles": [
+    "ChinaMapView.swift",
+    "Components.swift",
+    "DetailView.swift",
+    "JournalView.swift",
+    "MapHomeView.swift",
+    "Models.swift",
+    "PlaceEditor.swift",
+    "SettingsView.swift",
+    "ShanheApp.swift",
+    "TravelStore.swift",
+    "ZipArchive.swift"
+  ],
+  "appTarget": "000000000000000000000008",
+  "testTarget": "000000000000000000000009",
+  "resources": [
+    "map.json",
+    "sea.json",
+    "PrivacyInfo.xcprivacy",
+    "Assets.xcassets"
+  ],
+  "tests": [
+    "ShanheTests.swift",
+    "WindowsBackup.zip",
+    "WindowsTimelineBackup.zip"
+  ],
+  "dependencies": []
+}
