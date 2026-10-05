@@ -1,0 +1,49 @@
+name: Build iOS IPA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "Shanhe/**"
+      - "Shanhe.xcodeproj/**"
+      - "ShanheTests/**"
+      - "build-ipa-mac.sh"
+      - ".github/workflows/build-ios.yml"
+  workflow_dispatch:
+    inputs:
+      run_tests:
+        description: 'Run simulator XCTest after building (takes longer)'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v7
+      - name: Build unsigned device IPA
+        env:
+          RUN_TESTS: ${{ inputs.run_tests }}
+        run: bash build-ipa-mac.sh
+      - name: Downloadable IPA
+        uses: actions/upload-artifact@v7
+        with:
+          name: Shanhe-iOS-IPA
+          path: build/IPA/Shanhe-unsigned.ipa
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 0
+      - name: Build logs
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: Shanhe-iOS-build-logs
+          path: build/logs/
+          if-no-files-found: ignore
+          retention-days: 3
